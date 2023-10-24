@@ -73,3 +73,9 @@ update INVENTTABLE
 	set PRIMARYVENDORID = N''
 where PRIMARYVENDORID = ''
 
+--7 Remove {"} symbol from Item Names and Descriptions
+Update EcoResProductTranslation 
+Set 
+    Name = LEFT(REPLACE(Name, '"',''''''), 60),
+    Description = LEFT(REPLACE(Name, '"',''''''), 1000)
+where name LIKE '%"%' or description LIKE '%"%'
